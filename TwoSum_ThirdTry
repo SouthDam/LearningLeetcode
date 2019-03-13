@@ -1,0 +1,20 @@
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        unordered_map<int,int> HashMap;
+        for(int i=0;i<nums.size();i++){
+            int left=target-nums[i];
+            if(HashMap.count(left)){
+                return {i,HashMap[left]};
+            }
+            HashMap[nums[i]]=i;
+        }
+        return {};
+    }
+};
+
+/*
+Using Hash Map, whose time complexity in searching is O(1), and return the result as soon as the result is found.
+Time complexity O(n), space complexity O(1), but acutally use more memory than brute force solution, while better than Two-Pass
+Hash map solution.
+*/
