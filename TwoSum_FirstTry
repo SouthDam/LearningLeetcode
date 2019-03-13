@@ -16,3 +16,9 @@ public:
         return re;
     }
 };
+
+/*
+A brute force solution, 
+time complexity O(n^2), space complexity O(1). 
+According to the submission statements, this solution is slow but saves memory.
+*/
