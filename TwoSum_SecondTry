@@ -17,3 +17,8 @@ public:
         return re;
     }
 };
+
+/*
+Two-pass Hash map solution. Time complexity O(n), space complexity O(1). Faster than brute force solution,
+but slower than one-pass hash map solution. Use most memory in these three solutions.
+*/
