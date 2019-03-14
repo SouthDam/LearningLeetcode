@@ -1,0 +1,35 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        ListNode prehead(0),*p=&prehead;
+        int extra=0;
+        while(l1||l2||extra){
+            int sum=(l1?l1->val:0)+(l2?l2->val:0)+extra;
+            extra=sum/10;
+            p->next=new ListNode(sum%10);
+            p=p->next;
+            l1=(l1?l1->next:NULL);
+            l2=(l2?l2->next:NULL);
+        }
+        return prehead.next;
+    }
+};
+
+/*
+For 'listnode*', use '->' to visit and operate elements in the listnode structure, for 'listnode', use (name).(element).
+Use '?' operator properly, you do not need to use 'if' when there is just simple comparison.
+Create a node by 'ListNode* name = new Listnode(int or other type)' or just by 'Listnode name(int or other type)'.
+To create a new linked-list, create a new node and then create a pointer point to this new node, use this pointer to operate, 
+in this way you can call the node to output the linked-list from head efficiently. (Above in the code it is '*p=&prehead',
+because the pointer should point to the address of the node.)
+Note also: when create '*p', it is a variable as a whole, in this case, 'p' is a pointer, which store the address of the stuff
+it points to.
+*/
