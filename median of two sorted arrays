@@ -46,3 +46,59 @@ class Solution(object):
         else :
             return ((maxLeft+minRight)/2)
                     
+** update: according to the test run on google colab, the algorithm itself is correct, the problem is grammar and boundary
+** the solution class should looks like:
+# not sure if define the two variables in '__init__' is necessary in this case
+class Solution(object):
+    def __init__(self):
+        self.maxLeft = 0
+        self.minRight = 0
+    def findMedianSortedArrays(self, nums1, nums2):
+        """
+        :type nums1: List[int]
+        :type nums2: List[int]
+        :rtype: float
+        """
+        m, n = len(nums1), len(nums2)
+        if m>n:
+            nums1, nums2 = nums2, nums1
+            m, n = n, m
+        if m == 0:
+            if n %2 :
+                return nums2[(n-1)/2]
+            else:
+                return (float(nums2[n/2]+nums2[(n-1)/2])/2)
+        imin = 0
+        imax = m
+        half = int((m+n+1)/2)
+        
+        while(imin<=imax):
+            i = int((imin+imax)/2)
+            j = half - i
+            
+            if i< imax and nums2[j-1]>nums1[i]:
+                imin = i+1
+            elif i>imin and nums1[i-1]>nums2[j]:
+                imax = i-1
+            else:
+                break
+        
+        if i==0:
+            maxLeft = nums2[j-1]
+        elif j==0:
+            maxLeft = nums1[i-1]
+        else:
+            maxLeft = max(nums2[j-1],nums1[i-1])
+                
+        if i==m:
+            minRight = nums2[j]
+        elif j==n:
+            minRight = nums1[i]
+        else:
+            minRight = min(nums2[j],nums1[i])
+                
+        if (m+n) % 2 :
+            return maxLeft
+        else :
+            return (float(maxLeft+minRight)/2)
+                    
